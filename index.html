@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>🌙 خواهر اگه فهمیدی به منم بگو چیه</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Vazirmatn',system-ui,sans-serif;background:#050318;color:#fff;direction:rtl}
+
+/* ============ BACKGROUND: کهکشان ============ */
+#bg{position:fixed;inset:0;z-index:0;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(80,40,180,.55) 0%, transparent 55%),
+    radial-gradient(circle at 85% 75%, rgba(30,60,160,.55) 0%, transparent 55%),
+    radial-gradient(circle at 50% 50%, rgba(120,80,200,.25) 0%, transparent 70%),
+    radial-gradient(circle at 50% 105%, rgba(60,30,140,.6) 0%, transparent 60%),
+    linear-gradient(160deg,#050318,#0a0a2e 45%,#050318);
+  animation:bgShift 22s ease-in-out infinite alternate}
+@keyframes bgShift{0%{filter:hue-rotate(0) brightness(1)}100%{filter:hue-rotate(35deg) brightness(1.18)}}
+
+#aurora{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden;opacity:.55}
+.aurora-band{position:absolute;left:-20%;right:-20%;height:38vh;border-radius:50%;
+  filter:blur(60px);mix-blend-mode:screen;
+  animation:auroraMove 18s ease-in-out infinite alternate}
+.aurora-band.a1{top:8%;background:linear-gradient(90deg,transparent,rgba(120,80,255,.55),rgba(90,180,255,.45),transparent)}
+.aurora-band.a2{top:38%;background:linear-gradient(90deg,transparent,rgba(180,120,255,.45),rgba(120,220,255,.45),transparent);animation-duration:24s;animation-delay:-6s}
+.aurora-band.a3{top:66%;background:linear-gradient(90deg,transparent,rgba(80,140,255,.4),rgba(200,150,255,.4),transparent);animation-duration:20s;animation-delay:-12s}
+@keyframes auroraMove{0%{transform:translateX(-8%) scaleY(.85) rotate(-1deg)}100%{transform:translateX(8%) scaleY(1.15) rotate(1deg)}}
+
+#stars{position:fixed;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+.star-dot{position:absolute;background:#fff;border-radius:50%;animation:twinkle 3s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.1;transform:scale(.5)}50%{opacity:1;transform:scale(1.4)}}
+.star-glow{position:absolute;border-radius:50%;filter:blur(2px);animation:twinkle 4s ease-in-out infinite}
+
+/* ============ GATES ============ */
+.gate{position:fixed;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;padding:26px 16px;opacity:0;pointer-events:none;transform:scale(.93) translateY(14px);transition:opacity .65s ease,transform .65s cubic-bezier(.2,1.1,.35,1);overflow-y:auto}
+.gate.active{opacity:1;pointer-events:auto;transform:scale(1) translateY(0)}
+.gate-inner{background:linear-gradient(160deg,rgba(80,60,180,.18),rgba(40,30,100,.22));
+  border:1px solid rgba(180,180,255,.18);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border-radius:30px;padding:34px 24px 30px;max-width:530px;width:100%;text-align:center;
+  box-shadow:0 30px 90px rgba(0,0,0,.75),inset 0 1px 0 rgba(255,255,255,.18),
+             0 0 80px rgba(140,100,255,.15);
+  position:relative;overflow:hidden;margin:auto}
+.gate-inner::before{content:'';position:absolute;inset:-2px;
+  background:radial-gradient(circle at 50% 0%, rgba(180,150,255,.25), transparent 65%);pointer-events:none}
+
+.g-title{font-size:clamp(1.25rem,4.8vw,1.75rem);font-weight:900;margin:14px 0 8px;line-height:1.6;
+  background:linear-gradient(180deg,#ffffff,#c9d8ff,#a896ff);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 14px rgba(150,180,255,.5))}
+.g-sub{font-size:clamp(.88rem,3.4vw,1rem);color:rgba(220,225,255,.82);line-height:2;margin:8px 0 18px}
+.g-hint{font-size:.78rem;color:rgba(200,210,255,.5);margin-top:16px;min-height:1.2em;transition:color .3s}
+.g-hint.warn{color:#ffc9dd}.g-hint.ok{color:#a8f0d0}
+
+.btn{font-family:inherit;font-size:clamp(.9rem,3.4vw,1rem);font-weight:700;padding:13px 28px;border-radius:50px;border:none;cursor:pointer;
+  background:linear-gradient(135deg,#8fa0ff,#5c4bd6);
+  color:#fff;margin:5px;
+  box-shadow:0 10px 34px rgba(90,80,220,.5),inset 0 1px 0 rgba(255,255,255,.35),
+             0 0 30px rgba(140,130,255,.35);
+  transition:transform .25s cubic-bezier(.2,1.5,.4,1),box-shadow .25s}
+.btn:hover{transform:translateY(-3px) scale(1.045);box-shadow:0 16px 46px rgba(90,80,220,.7),0 0 50px rgba(160,140,255,.6)}
+.btn:active{transform:scale(.96)}
+.btn.ghost{background:rgba(180,190,255,.08);border:1px solid rgba(180,190,255,.25);box-shadow:none}
+.btn.ghost:hover{background:rgba(180,190,255,.18)}
+.btn.gold{background:linear-gradient(135deg,#ffd97a,#e0a536);color:#2a1a00;box-shadow:0 10px 34px rgba(255,200,80,.45),inset 0 1px 0 rgba(255,255,255,.5),0 0 40px rgba(255,215,120,.4)}
+.btn.gold:hover{box-shadow:0 16px 46px rgba(255,200,80,.7),0 0 60px rgba(255,215,120,.65)}
+.btn.big{font-size:1.1rem;padding:16px 38px}
+.btn-row{display:flex;justify-content:center;flex-wrap:wrap;gap:6px}
+
+/* ============ GATE 1: ستاره‌ی هدیه ============ */
+.gift-star{position:relative;display:inline-block;font-size:clamp(4.5rem,20vw,6.5rem);line-height:1;
+  animation:starFloat 3.4s ease-in-out infinite;
+  filter:drop-shadow(0 0 30px rgba(255,220,140,.9)) drop-shadow(0 0 60px rgba(255,180,80,.5))}
+@keyframes starFloat{0%,100%{transform:translateY(0) rotate(-8deg) scale(1)}50%{transform:translateY(-18px) rotate(8deg) scale(1.08)}}
+.gift-star::after{content:'';position:absolute;inset:-30px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,220,140,.4) 0%,transparent 70%);
+  animation:pulseGlow 2.4s ease-in-out infinite;z-index:-1}
+@keyframes pulseGlow{0%,100%{transform:scale(.9);opacity:.6}50%{transform:scale(1.25);opacity:1}}
+
+.name-badge{display:inline-block;margin:14px 0 20px;padding:10px 34px;border-radius:99px;
+  font-size:clamp(1.2rem,5vw,1.55rem);font-weight:900;letter-spacing:1px;
+  background:linear-gradient(135deg,rgba(140,120,255,.28),rgba(255,215,120,.28));
+  border:1px solid rgba(255,215,140,.55);
+  color:#ffe9a8;
+  box-shadow:0 0 34px rgba(180,160,255,.4),inset 0 0 22px rgba(255,215,140,.15);
+  animation:badgeGlow 2.8s ease-in-out infinite}
+@keyframes badgeGlow{0%,100%{box-shadow:0 0 24px rgba(180,160,255,.35)}50%{box-shadow:0 0 56px rgba(255,215,140,.7)}}
+
+/* ============ CHARACTER (ماه‌دخت) ============ */
+.char{width:min(190px,46vw);height:auto;display:block;margin:0 auto;animation:bob 2.4s ease-in-out infinite;
+  filter:drop-shadow(0 18px 40px rgba(140,120,255,.55))}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.char.shake{animation:shakeX .5s ease}
+@keyframes shakeX{0%,100%{transform:translateX(0)}20%{transform:translateX(-11px) rotate(-3deg)}40%{transform:translateX(11px) rotate(3deg)}60%{transform:translateX(-7px)}80%{transform:translateX(7px)}}
+
+/* ============ STAR TAP (gate 4) ============ */
+#starTap{font-size:clamp(3.6rem,17vw,5rem);line-height:1;cursor:pointer;user-select:none;display:inline-block;
+  transition:transform .16s cubic-bezier(.2,1.8,.4,1);
+  filter:drop-shadow(0 0 26px rgba(255,220,120,.9)) drop-shadow(0 0 60px rgba(180,160,255,.5))}
+#starTap:active{transform:scale(.82)}
+#starMeter{width:min(260px,72vw);height:14px;margin:20px auto 10px;border-radius:99px;
+  background:rgba(180,190,255,.1);overflow:hidden;border:1px solid rgba(180,190,255,.2)}
+#starMeterFill{height:100%;width:0%;border-radius:99px;
+  background:linear-gradient(90deg,#8fa0ff,#ffd970);
+  box-shadow:0 0 20px rgba(255,220,120,.9);
+  transition:width .4s cubic-bezier(.2,1.2,.3,1)}
+.pop-spark{position:fixed;z-index:95;pointer-events:none;font-size:1.6rem;
+  animation:popUp 1.4s ease-out forwards;filter:drop-shadow(0 0 8px rgba(255,220,140,.9))}
+@keyframes popUp{0%{opacity:1;transform:translate(-50%,-50%) scale(.4)}100%{opacity:0;transform:translate(-50%,-280%) scale(1.8)}}
+
+/* ============ OPTIONS ============ */
+.options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+.opt{font-family:inherit;font-size:clamp(.8rem,3.2vw,.95rem);font-weight:700;padding:14px 8px;border-radius:18px;cursor:pointer;
+  background:rgba(180,190,255,.07);border:1px solid rgba(180,190,255,.2);color:#fff;transition:.25s}
+.opt:hover{background:rgba(180,190,255,.18);transform:translateY(-2px)}
+.opt.wrong{animation:shakeX .45s;border-color:#ff8fa8;background:rgba(255,90,140,.18)}
+.opt.right{background:linear-gradient(135deg,rgba(140,255,200,.28),rgba(255,215,120,.28));border-color:#a8f0c0;box-shadow:0 0 28px rgba(160,240,200,.4)}
+
+/* ============ CONSTELLATION PICK (gate 5) ============ */
+.constellations{display:flex;justify-content:center;gap:14px;margin:22px 0 6px;flex-wrap:wrap}
+.constellation{width:clamp(78px,22vw,110px);height:clamp(78px,22vw,110px);
+  border-radius:22px;background:linear-gradient(160deg,rgba(120,110,255,.15),rgba(60,50,160,.2));
+  border:1px solid rgba(180,190,255,.25);cursor:pointer;padding:8px;
+  transition:.35s cubic-bezier(.2,1.4,.4,1);
+  animation:floaty 3.6s ease-in-out infinite;position:relative;overflow:hidden}
+.constellation:nth-child(2){animation-delay:.5s}
+.constellation:nth-child(3){animation-delay:1s}
+.constellation:hover{transform:translateY(-6px) scale(1.08);border-color:rgba(255,215,120,.7);box-shadow:0 12px 40px rgba(255,215,120,.3),0 0 60px rgba(140,130,255,.4)}
+.constellation svg{width:100%;height:100%;display:block}
+.constellation .c-name{position:absolute;bottom:4px;left:0;right:0;font-size:.68rem;color:rgba(220,225,255,.85);text-align:center;font-weight:700}
+.constellation.picked{animation:pickedPulse .9s ease;border-color:#ffd970;box-shadow:0 0 60px rgba(255,215,120,.8)}
+@keyframes pickedPulse{0%{transform:scale(1)}45%{transform:scale(1.15);filter:brightness(1.8)}100%{transform:scale(1)}}
+
+/* ============ LANTERN (gate 6) ============ */
+.lantern-wrap{position:relative;display:inline-block;margin:16px 0 10px;cursor:pointer;user-select:none;transition:transform .3s}
+.lantern-wrap:active{transform:scale(.94)}
+.lantern-body{font-size:clamp(4rem,18vw,5.6rem);line-height:1;display:block;transition:filter 1s;
+  filter:drop-shadow(0 0 30px rgba(255,180,90,.4)) grayscale(.6) brightness(.7)}
+.lantern-body.lit{filter:drop-shadow(0 0 40px rgba(255,200,100,1)) drop-shadow(0 0 80px rgba(255,160,60,.7))}
+.lantern-flame{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);
+  font-size:clamp(1.4rem,6vw,1.9rem);opacity:0;transition:opacity 1s .3s;
+  animation:flicker .5s ease-in-out infinite alternate;filter:drop-shadow(0 0 22px rgba(255,180,60,.95))}
+.lantern-flame.on{opacity:1}
+@keyframes flicker{0%{transform:translate(-50%,-50%) scaleY(1) rotate(-3deg)}100%{transform:translate(-50%,-50%) scaleY(1.2) rotate(3deg)}}
+
+/* ============ INPUT (gate 8) ============ */
+#g8input{font-family:inherit;font-size:1.05rem;text-align:center;width:min(280px,85%);padding:14px 18px;margin:6px auto 14px;
+  border-radius:16px;border:1px solid rgba(180,190,255,.3);
+  background:rgba(180,190,255,.07);color:#fff;outline:none;display:block;transition:.3s}
+#g8input:focus{border-color:#a896ff;box-shadow:0 0 30px rgba(160,140,255,.5);background:rgba(180,190,255,.14)}
+#g8input::placeholder{color:rgba(200,210,255,.4)}
+
+/* ============ CHEST (gate 9) ============ */
+.chest{font-size:clamp(4rem,18vw,5.6rem);line-height:1;cursor:pointer;user-select:none;display:inline-block;
+  transition:transform .35s cubic-bezier(.2,1.6,.4,1);
+  filter:drop-shadow(0 14px 34px rgba(255,200,80,.55));
+  animation:chestFloat 3s ease-in-out infinite}
+@keyframes chestFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
+.chest:hover{transform:scale(1.08) rotate(-5deg)}
+.chest.open{animation:chestOpen .9s ease}
+@keyframes chestOpen{0%{transform:scale(1)}25%{transform:scale(1.35) rotate(-12deg)}55%{transform:scale(1.15) rotate(8deg)}100%{transform:scale(1.1) rotate(0)}}
+
+/* ============ DREAM PICK (gate 10) ============ */
+.dreams{display:flex;justify-content:center;gap:12px;margin:18px 0 4px;flex-wrap:wrap}
+.dream{font-size:clamp(2.4rem,11vw,3.2rem);background:none;border:none;cursor:pointer;
+  filter:drop-shadow(0 0 18px rgba(180,190,255,.8));transition:transform .25s cubic-bezier(.2,1.6,.4,1);
+  animation:floaty 3.2s ease-in-out infinite}
+.dream:nth-child(2){animation-delay:.4s}
+.dream:nth-child(3){animation-delay:.8s}
+.dream:hover{transform:scale(1.3) rotate(12deg)}
+.dream.chosen{animation:flyUp 1.2s cubic-bezier(.3,.9,.3,1) forwards}
+@keyframes flyUp{0%{transform:scale(1)}100%{transform:translateY(-75vh) scale(.2);opacity:0}}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-16px) rotate(4deg)}}
+
+/* ============ BREATHE (gate 11) ============ */
+.breath-circle{width:clamp(90px,24vw,120px);height:clamp(90px,24vw,120px);border-radius:50%;margin:6px auto 22px;
+  background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.95),rgba(160,180,255,.5) 45%,rgba(100,70,220,.25) 75%);
+  box-shadow:0 0 60px rgba(150,160,255,.6),inset 0 0 40px rgba(255,255,255,.4);
+  animation:breathe 8s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(.72);opacity:.7}50%{transform:scale(1.22);opacity:1}}
+.big-emoji{font-size:clamp(3.4rem,15vw,4.6rem);line-height:1;animation:floaty 3s ease-in-out infinite;filter:drop-shadow(0 0 30px rgba(255,220,140,.85))}
+
+/* ============ COUNTDOWN ============ */
+#countdown{position:fixed;inset:0;z-index:120;display:flex;align-items:center;justify-content:center;
+  font-size:32vmin;font-weight:900;color:#ffe9a8;
+  text-shadow:0 0 60px rgba(255,200,110,.95),0 0 140px rgba(160,140,255,.7);
+  opacity:0;pointer-events:none;transition:opacity .3s}
+#countdown.show{opacity:1}
+@keyframes pop{0%{transform:scale(.3);opacity:0}30%{transform:scale(1.15);opacity:1}100%{transform:scale(1.9);opacity:0}}
+
+/* ============ GIFT PAGE ============ */
+#gift{position:fixed;inset:0;z-index:20;display:none;overflow:hidden}
+#gift.show{display:block}
+#stage{position:absolute;left:50%;top:50%;width:1000px;height:1000px;
+  transform-origin:50% 50%;transform:translate(-50%,-50%) scale(var(--stage-scale,1))}
+
+/* ماه کامل پشت صحنه */
+#fullMoon{
+  position:absolute;left:50%;top:50%;width:820px;height:820px;
+  transform:translate(-50%,-50%);border-radius:50%;
+  background:radial-gradient(circle at 42% 38%,
+    rgba(255,250,235,.95) 0%,
+    rgba(255,235,180,.75) 22%,
+    rgba(220,190,255,.45) 45%,
+    rgba(140,120,240,.22) 65%,
+    transparent 82%);
+  filter:blur(12px);
+  opacity:0;transition:opacity 2.5s ease;
+  z-index:0;
+}
+#fullMoon.on{opacity:1;animation:moonBeat 2.2s ease-in-out infinite 2s}
+@keyframes moonBeat{
+  0%,100%{transform:translate(-50%,-50%) scale(1);filter:blur(12px) brightness(1)}
+  18%{transform:translate(-50%,-50%) scale(1.035);filter:blur(12px) brightness(1.35)}
+  36%{transform:translate(-50%,-50%) scale(1)}
+  54%{transform:translate(-50%,-50%) scale(1.025);filter:blur(12px) brightness(1.22)}
+  72%{transform:translate(-50%,-50%) scale(1)}
+}
+
+#heartWords{position:absolute;inset:0;z-index:2}
+.hw{
+  position:absolute;opacity:0;white-space:nowrap;text-align:center;
+  color:#f0f3ff;font-weight:500;
+  text-shadow:
+    0 0 10px rgba(180,200,255,.95),
+    0 0 24px rgba(140,150,255,.7),
+    0 0 46px rgba(120,90,255,.45);
+  transition:opacity .9s ease,transform 1s cubic-bezier(.18,1.3,.35,1);
+  line-height:1}
+.hw.on{opacity:.96}
+
+#mainText{position:absolute;left:50%;top:46%;z-index:3;
+  transform:translate(-50%,-50%) scale(.5);opacity:0;text-align:center;white-space:nowrap;
+  transition:opacity 1.4s ease,transform 1.4s cubic-bezier(.16,1.4,.35,1);pointer-events:none}
+#mainText.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
+#mainText .l1{
+  font-weight:900;line-height:1.2;
+  background:linear-gradient(180deg,#fff 0%,#ffe9b0 45%,#c9b8ff 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 22px rgba(255,220,150,.95)) drop-shadow(0 0 60px rgba(150,140,255,.85));
+  animation:titleGlow 2.6s ease-in-out infinite}
+#mainText .l2{
+  font-weight:900;line-height:1.4;
+  background:linear-gradient(180deg,#fff 0%,#d8e4ff 50%,#a896ff 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 20px rgba(180,200,255,.95)) drop-shadow(0 0 55px rgba(120,90,255,.85));
+  animation:titleGlow 2.6s ease-in-out infinite .5s}
+@keyframes titleGlow{
+  0%,100%{filter:drop-shadow(0 0 18px rgba(255,220,150,.8)) drop-shadow(0 0 46px rgba(150,140,255,.6))}
+  50%{filter:drop-shadow(0 0 34px rgba(255,235,170,1)) drop-shadow(0 0 90px rgba(150,140,255,1))}
+}
+
+/* ============ GARDEN: پروانه + کرم شب‌تاب + ستاره + گلبرگ ============ */
+#garden{position:fixed;inset:0;z-index:30;pointer-events:none;overflow:hidden}
+.float-el{position:absolute;top:-12vh;will-change:transform;
+  animation-name:fall;animation-timing-function:linear;animation-iteration-count:infinite}
+.float-el-inner{display:block;animation-name:sway;animation-timing-function:ease-in-out;
+  animation-iteration-count:infinite;animation-direction:alternate;
+  filter:drop-shadow(0 0 12px rgba(180,200,255,.7))}
+@keyframes fall{0%{transform:translateY(-14vh) translateX(0)}100%{transform:translateY(118vh) translateX(8vw)}}
+@keyframes sway{0%{transform:rotate(-30deg) translateX(-22px) scale(.9)}100%{transform:rotate(30deg) translateX(22px) scale(1.08)}}
+
+/* کرم شب‌تاب (ستاره کوچولوی تپنده) */
+.firefly{position:fixed;z-index:31;pointer-events:none;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,240,170,1) 0%,rgba(255,220,120,.7) 40%,transparent 75%);
+  animation:fireflyFloat linear infinite}
+@keyframes fireflyFloat{
+  0%{opacity:0;transform:translate(0,0) scale(.4)}
+  15%{opacity:1;transform:translate(10px,-20px) scale(1)}
+  50%{opacity:.9;transform:translate(-15px,-60px) scale(1.1)}
+  85%{opacity:1;transform:translate(20px,-120px) scale(1)}
+  100%{opacity:0;transform:translate(0,-180px) scale(.4)}
+}
+
+/* ============ FLASH & SWEEP ============ */
+#flash{position:fixed;inset:0;z-index:90;pointer-events:none;opacity:0;
+  background:radial-gradient(circle at 50% 46%,
+    rgba(255,255,255,1) 0%,
+    rgba(255,240,190,.95) 16%,
+    rgba(255,210,110,.6) 34%,
+    rgba(180,150,255,.3) 55%,
+    transparent 74%);
+  mix-blend-mode:screen}
+#flash.go{animation:flashAnim 1.7s ease-out forwards}
+@keyframes flashAnim{0%{opacity:0;transform:scale(.25)}14%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.75)}}
+#sweep{position:fixed;inset:0;z-index:91;pointer-events:none;
+  background:linear-gradient(105deg,transparent 34%,rgba(255,245,210,.95) 50%,transparent 66%);
+  transform:translateX(-130%);mix-blend-mode:screen}
+#sweep.go{animation:sweepAnim 1.6s cubic-bezier(.4,0,.3,1) forwards}
+@keyframes sweepAnim{0%{transform:translateX(-130%);opacity:0}10%{opacity:1}100%{transform:translateX(130%);opacity:0}}
+
+/* ============ FINAL NOTE ============ */
+#finalNote{position:fixed;left:0;right:0;bottom:0;z-index:50;padding:14px 16px 20px;text-align:center;
+  opacity:0;transform:translateY(24px);transition:opacity 1.4s ease,transform 1.4s cubic-bezier(.2,1.2,.3,1);pointer-events:none}
+#finalNote.on{opacity:1;transform:none;pointer-events:auto}
+#finalNote .note1{font-size:clamp(.95rem,3.6vw,1.05rem);font-weight:700;margin-bottom:4px;color:#eef2ff;
+  text-shadow:0 0 18px rgba(180,200,255,.9)}
+#finalNote .note2{font-size:clamp(.72rem,3vw,.82rem);margin-bottom:10px;color:rgba(200,210,255,.6)}
+
+@media (max-width:600px){
+  .gate{padding:18px 12px}
+  .gate-inner{padding:26px 16px 22px;border-radius:24px}
+  .options{gap:8px}
+  .constellations{gap:10px}
+}
+</style>
+</head>
+<body>
+
+<div id="bg"></div>
+<div id="aurora">
+  <div class="aurora-band a1"></div>
+  <div class="aurora-band a2"></div>
+  <div class="aurora-band a3"></div>
+</div>
+<div id="stars"></div>
+
+<!-- ========== ۱ ========== -->
+<section class="gate active" id="gate1">
+  <div class="gate-inner">
+    <div class="gift-star">🌟</div>
+    <h1 class="g-title">یه ستاره از آسمون افتاد...</h1>
+    <p class="g-sub">برای کسی که خودش یه ستاره‌ست 💫</p>
+    <div class="name-badge">هستی</div>
+    <div class="btn-row"><button class="btn gold" data-goto="1">پرواز کن ✨</button></div>
+  </div>
+</section>
+
+<!-- ========== ۲ ========== -->
+<section class="gate" id="gate2">
+  <div class="gate-inner">
+    <svg class="char" id="char2" viewBox="0 0 220 250">
+      <defs>
+        <linearGradient id="skin2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffe3cf"/><stop offset="100%" stop-color="#f7c3a5"/></linearGradient>
+        <linearGradient id="dress2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#a896ff"/><stop offset="100%" stop-color="#5c3fb0"/></linearGradient>
+        <linearGradient id="hair2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3a2a5c"/><stop offset="100%" stop-color="#1a1035"/></linearGradient>
+      </defs>
+      <path d="M110 158 c42 0 64 22 68 58 l6 30 h-148 l6-30 c4-36 26-58 68-58z" fill="url(#dress2)"/>
+      <rect x="98" y="132" width="24" height="34" rx="12" fill="#f0b99b"/>
+      <ellipse cx="110" cy="95" rx="58" ry="62" fill="url(#skin2)"/>
+      <!-- موها -->
+      <path d="M50 92 c0-46 28-70 60-70 s60 24 60 70 c0-14-6-26-16-32 c-6-2-10 2-14 10 c-6 12-14 20-30 22 c-16 2-30-4-38-14 c-6-8-12-10-18 0 c-4 4-4 10-4 14z" fill="url(#hair2)"/>
+      <path d="M50 92 q-6 50 10 90 q6 12 18 8 q-16-40-10-80z" fill="url(#hair2)"/>
+      <path d="M170 92 q6 50-10 90 q-6 12-18 8 q16-40 10-80z" fill="url(#hair2)"/>
+      <!-- ستاره توی مو -->
+      <text x="72" y="52" font-size="18" fill="#ffe9a8" text-anchor="middle">★</text>
+      <text x="150" y="60" font-size="14" fill="#ffe9a8" text-anchor="middle">★</text>
+      <text x="160" y="45" font-size="10" fill="#ffe9a8" text-anchor="middle">✦</text>
+      <!-- چشم‌ها -->
+      <ellipse cx="88" cy="92" rx="13.5" ry="15.5" fill="#fff"/>
+      <ellipse cx="132" cy="92" rx="13.5" ry="15.5" fill="#fff"/>
+      <circle cx="88" cy="94" r="7" fill="#2a1a44"/>
+      <circle cx="132" cy="94" r="7" fill="#2a1a44"/>
+      <circle cx="90.5" cy="90.5" r="2.4" fill="#fff"/>
+      <circle cx="134.5" cy="90.5" r="2.4" fill="#fff"/>
+      <path d="M74 66 q14 -10 26 -3" stroke="#1a1035" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <path d="M146 66 q-14 -10 -26 -3" stroke="#1a1035" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <ellipse cx="110" cy="120" rx="9.5" ry="11.5" fill="#7a2b3d"/>
+      <ellipse cx="72" cy="112" rx="11" ry="6" fill="#ff9ec2" opacity=".5"/>
+      <ellipse cx="148" cy="112" rx="11" ry="6" fill="#ff9ec2" opacity=".5"/>
+    </svg>
+    <h1 class="g-title">مطمئنی می‌خوای پرواز کنی؟</h1>
+    <p class="g-sub" id="g2msg">آخه این سفر... یه‌کم جادوییه 🌌</p>
+    <div class="btn-row">
+      <button class="btn" id="g2yes">آره، ببرم به کهکشان</button>
+      <button class="btn ghost" id="g2no">نه، می‌ترسم</button>
+    </div>
+    <p class="g-hint" id="g2hint"></p>
+  </div>
+</section>
+
+<!-- ========== ۳ ========== -->
+<section class="gate" id="gate3">
+  <div class="gate-inner">
+    <div class="big-emoji">🌠</div>
+    <h1 class="g-title">قبلش یه قول بده</h1>
+    <p class="g-sub">قول بده هیچ‌وقت آرزوهات رو رها نکنی، حتی اگه سخت بشه</p>
+    <div class="btn-row">
+      <button class="btn" id="g3yes">قول می‌دم</button>
+      <button class="btn ghost" id="g3no">قول نمی‌دم</button>
+    </div>
+    <p class="g-hint" id="g3hint"></p>
+  </div>
+</section>
+
+<!-- ========== ۴ ========== -->
+<section class="gate" id="gate4">
+  <div class="gate-inner">
+    <h1 class="g-title">ستاره‌ها رو جمع کن ✨</h1>
+    <p class="g-sub">روی ستاره بزن تا غبار ستاره‌ای جمع کنی</p>
+    <div id="starTap">⭐</div>
+    <div id="starMeter"><div id="starMeterFill"></div></div>
+    <p class="g-hint" id="g4hint">۰ از ۵</p>
+  </div>
+</section>
+
+<!-- ========== ۵ ========== -->
+<section class="gate" id="gate5">
+  <div class="gate-inner">
+    <h1 class="g-title">یه صورت فلکی انتخاب کن 🌌</h1>
+    <p class="g-sub">هر کدوم یه راز از آسمون داره...</p>
+    <div class="constellations">
+      <div class="constellation" data-cons="big">
+        <svg viewBox="0 0 100 100">
+          <line x1="20" y1="70" x2="35" y2="50" stroke="#a8c8ff" stroke-width="1.5" opacity=".7"/>
+          <line x1="35" y1="50" x2="55" y2="45" stroke="#a8c8ff" stroke-width="1.5" opacity=".7"/>
+          <line x1="55" y1="45" x2="70" y2="30" stroke="#a8c8ff" stroke-width="1.5" opacity=".7"/>
+          <line x1="70" y1="30" x2="82" y2="55" stroke="#a8c8ff" stroke-width="1.5" opacity=".7"/>
+          <line x1="82" y1="55" x2="60" y2="72" stroke="#a8c8ff" stroke-width="1.5" opacity=".7"/>
+          <line x1="60" y1="72" x2="35" y2="50" stroke="#a8c8ff" stroke-width="1.5" opacity=".7"/>
+          <circle cx="20" cy="70" r="3" fill="#ffe9a8"/>
+          <circle cx="35" cy="50" r="3" fill="#ffe9a8"/>
+          <circle cx="55" cy="45" r="3" fill="#ffe9a8"/>
+          <circle cx="70" cy="30" r="3.5" fill="#ffe9a8"/>
+          <circle cx="82" cy="55" r="3" fill="#ffe9a8"/>
+          <circle cx="60" cy="72" r="3" fill="#ffe9a8"/>
+        </svg>
+        <div class="c-name">خرس بزرگ</div>
+      </div>
+      <div class="constellation" data-cons="orion">
+        <svg viewBox="0 0 100 100">
+          <line x1="50" y1="18" x2="50" y2="42" stroke="#c9b8ff" stroke-width="1.5" opacity=".7"/>
+          <line x1="50" y1="42" x2="50" y2="68" stroke="#c9b8ff" stroke-width="1.5" opacity=".7"/>
+          <line x1="50" y1="42" x2="28" y2="38" stroke="#c9b8ff" stroke-width="1.5" opacity=".7"/>
+          <line x1="50" y1="42" x2="72" y2="38" stroke="#c9b8ff" stroke-width="1.5" opacity=".7"/>
+          <line x1="50" y1="68" x2="32" y2="86" stroke="#c9b8ff" stroke-width="1.5" opacity=".7"/>
+          <line x1="50" y1="68" x2="68" y2="86" stroke="#c9b8ff" stroke-width="1.5" opacity=".7"/>
+          <circle cx="50" cy="18" r="4" fill="#ffe9a8"/>
+          <circle cx="50" cy="42" r="3" fill="#ffe9a8"/>
+          <circle cx="28" cy="38" r="2.5" fill="#ffe9a8"/>
+          <circle cx="72" cy="38" r="2.5" fill="#ffe9a8"/>
+          <circle cx="50" cy="68" r="3" fill="#ffe9a8"/>
+          <circle cx="32" cy="86" r="3" fill="#ffe9a8"/>
+          <circle cx="68" cy="86" r="3" fill="#ffe9a8"/>
+        </svg>
+        <div class="c-name">شکارچی</div>
+      </div>
+      <div class="constellation" data-cons="pleiades">
+        <svg viewBox="0 0 100 100">
+          <line x1="30" y1="40" x2="45" y2="30" stroke="#a8f0d0" stroke-width="1.2" opacity=".7"/>
+          <line x1="45" y1="30" x2="62" y2="35" stroke="#a8f0d0" stroke-width="1.2" opacity=".7"/>
+          <line x1="62" y1="35" x2="70" y2="52" stroke="#a8f0d0" stroke-width="1.2" opacity=".7"/>
+          <line x1="70" y1="52" x2="58" y2="68" stroke="#a8f0d0" stroke-width="1.2" opacity=".7"/>
+          <line x1="58" y1="68" x2="40" y2="62" stroke="#a8f0d0" stroke-width="1.2" opacity=".7"/>
+          <line x1="40" y1="62" x2="30" y2="40" stroke="#a8f0d0" stroke-width="1.2" opacity=".7"/>
+          <circle cx="30" cy="40" r="3" fill="#a8f0d0"/>
+          <circle cx="45" cy="30" r="2.5" fill="#a8f0d0"/>
+          <circle cx="62" cy="35" r="2.8" fill="#a8f0d0"/>
+          <circle cx="70" cy="52" r="2.5" fill="#a8f0d0"/>
+          <circle cx="58" cy="68" r="2.5" fill="#a8f0d0"/>
+          <circle cx="40" cy="62" r="3" fill="#a8f0d0"/>
+        </svg>
+        <div class="c-name">ثریا</div>
+      </div>
+    </div>
+    <p class="g-hint" id="g5hint"></p>
+  </div>
+</section>
+
+<!-- ========== ۶ ========== -->
+<section class="gate" id="gate6">
+  <div class="gate-inner">
+    <h1 class="g-title">یه فانوس کاغذی 🏮</h1>
+    <p class="g-sub">روشنش کن و رهاش کن به آسمون...</p>
+    <div class="lantern-wrap" id="lantern">
+      <span class="lantern-flame" id="lanternFlame">🔥</span>
+      <span class="lantern-body" id="lanternBody">🏮</span>
+    </div>
+    <p class="g-hint" id="g6hint">روی فانوس بزن تا روشن شه</p>
+  </div>
+</section>
+
+<!-- ========== ۷ ========== -->
+<section class="gate" id="gate7">
+  <div class="gate-inner">
+    <h1 class="g-title">یه معما 🤔</h1>
+    <p class="g-sub">چیزی که توی شب می‌درخشه، از همه‌ی ستاره‌ها قشنگ‌تره و توی خونه‌ی ماست، چیه؟</p>
+    <div class="options">
+      <button class="opt" data-ok="0">ماه 🌙</button>
+      <button class="opt" data-ok="0">فانوس 🏮</button>
+      <button class="opt" data-ok="1">هستی 💫</button>
+      <button class="opt" data-ok="0">کرم شب‌تاب ✨</button>
+    </div>
+    <p class="g-hint" id="g7hint">یکی رو انتخاب کن...</p>
+  </div>
+</section>
+
+<!-- ========== ۸ ========== -->
+<section class="gate" id="gate8">
+  <div class="gate-inner">
+    <div class="big-emoji">🔐</div>
+    <h1 class="g-title">قفل کهکشانی</h1>
+    <p class="g-sub">برای باز شدن، اسمت رو بنویس</p>
+    <input id="g8input" type="text" placeholder="اسمت رو بنویس..." autocomplete="off">
+    <div class="btn-row"><button class="btn" id="g8btn">باز کن 🔓</button></div>
+    <p class="g-hint" id="g8hint"></p>
+  </div>
+</section>
+
+<!-- ========== ۹ ========== -->
+<section class="gate" id="gate9">
+  <div class="gate-inner">
+    <h1 class="g-title">یه صندوق گنج 💎</h1>
+    <p class="g-sub">فقط یکی می‌تونه بازش کنه... تو</p>
+    <div class="chest" id="chest">🎁</div>
+    <p class="g-hint" id="g9hint"></p>
+  </div>
+</section>
+
+<!-- ========== ۱۰ ========== -->
+<section class="gate" id="gate10">
+  <div class="gate-inner">
+    <h1 class="g-title">یه آرزو انتخاب کن 💭</h1>
+    <p class="g-sub">آرزوهات، ستاره‌های واقعی هستن</p>
+    <div class="dreams">
+      <button class="dream" data-dream="love">💖</button>
+      <button class="dream" data-dream="peace">🕊️</button>
+      <button class="dream" data-dream="star">🌟</button>
+    </div>
+    <p class="g-hint" id="g10hint"></p>
+  </div>
+</section>
+
+<!-- ========== ۱۱ ========== -->
+<section class="gate" id="gate11">
+  <div class="gate-inner">
+    <div class="breath-circle"></div>
+    <h1 class="g-title">نفس عمیق بکش...</h1>
+    <p class="g-sub">دم... بازدم... آروم 🌬️<br>حالا آماده‌ی پروازی</p>
+    <div class="btn-row"><button class="btn" id="g11btn">آماده‌ام</button></div>
+  </div>
+</section>
+
+<!-- ========== ۱۲ ========== -->
+<section class="gate" id="gate12">
+  <div class="gate-inner">
+    <div class="big-emoji">🌙</div>
+    <h1 class="g-title">همه‌چیز آماده‌ست</h1>
+    <p class="g-sub">هدیه‌ی تو، پشت این ستاره پنهونه...</p>
+    <div class="btn-row"><button class="btn big gold" id="g12btn">بذار ببینمش 🌌</button></div>
+  </div>
+</section>
+
+<!-- ========== HEDIYE ========== -->
+<section id="gift">
+  <div id="stage">
+    <div id="fullMoon"></div>
+    <div id="heartWords"></div>
+    <div id="mainText">
+      <div class="l1">هستی عزیزم</div>
+      <div class="l2">خواهر مهربونم، روز دختر مبارک</div>
+    </div>
+  </div>
+</section>
+
+<div id="garden"></div>
+
+<div id="finalNote">
+  <p class="note1">🌙 هر روزت روز دختر باشه، ستاره‌ی من 🌟</p>
+  <p class="note2">با عشق، برای هستی 💫</p>
+  <button class="btn ghost" id="replay">از اول ببین 🔁</button>
+</div>
+
+<div id="flash"></div>
+<div id="sweep"></div>
+<div id="countdown"></div>
+
+<script>
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+
+/* ============ تشخیص موبایل ============ */
+const IS_MOBILE = window.innerWidth < 700 || /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+
+/* ============ ستاره‌های پس‌زمینه ============ */
+(function(){
+  const box = $('#stars'); const frag = document.createDocumentFragment();
+  const count = IS_MOBILE ? 110 : 200;
+  for(let i=0;i<count;i++){
+    const s = document.createElement('i'); s.className='star-dot';
+    s.style.left = (Math.random()*100)+'vw';
+    s.style.top  = (Math.random()*100)+'vh';
+    const sz = Math.random()*2.4+0.7;
+    s.style.width = sz+'px'; s.style.height = sz+'px';
+    s.style.animationDelay = (Math.random()*4)+'s';
+    s.style.animationDuration = (2+Math.random()*4)+'s';
+    frag.appendChild(s);
+  }
+  /* چند ستاره‌ی درخشان‌تر */
+  for(let i=0;i<12;i++){
+    const s = document.createElement('i'); s.className='star-glow';
+    const sz = 3+Math.random()*3;
+    s.style.left = (Math.random()*100)+'vw';
+    s.style.top  = (Math.random()*100)+'vh';
+    s.style.width = sz+'px'; s.style.height = sz+'px';
+    s.style.background = 'radial-gradient(circle,#fff,rgba(200,220,255,.5),transparent 70%)';
+    s.style.animationDelay = (Math.random()*3)+'s';
+    frag.appendChild(s);
+  }
+  box.appendChild(frag);
+})();
+
+/* ============ ناوبری ============ */
+const gateEls = $$('.gate');
+let cur = 0;
+function goTo(idx){
+  if(idx<0||idx>=gateEls.length) return;
+  gateEls[cur].classList.remove('active');
+  cur = idx;
+  gateEls[cur].classList.add('active');
+}
+function toFa(n){ return String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]); }
+$$('[data-goto]').forEach(b=> b.addEventListener('click', ()=> goTo(parseInt(b.dataset.goto,10))));
+
+/* ============ شمارش معکوس ============ */
+function runCountdown(cb){
+  const el = $('#countdown');
+  const nums = ['۳','۲','۱']; let i = 0;
+  el.classList.add('show');
+  (function tick(){
+    if(i>=nums.length){ el.classList.remove('show'); el.textContent=''; cb(); return; }
+    el.textContent = nums[i];
+    el.style.animation='none'; void el.offsetWidth;
+    el.style.animation='pop .95s ease-out';
+    i++; setTimeout(tick,900);
+  })();
+}
+
+/* ============ ۲ ============ */
+(function(){
+  let n = 0;
+  $('#g2yes').addEventListener('click', ()=> goTo(2));
+  $('#g2no').addEventListener('click', ()=>{
+    n++;
+    const msgs = [
+      'باشه... ولی بدون که توی کهکشان یه چیز خیلی قشنگ منتظرته 🌌',
+      'می‌ترسی؟ مگه تو هستی نیستی؟ 🥺',
+      'هستی جان، دلت نمی‌گه نه... به من اعتماد کن 💫',
+      'باشه باشه، ولی یه بار دیگه به دلت گوش بده 😊',
+      'قربونت برم، دیگه نه نزن... بذار ببرمت آسمون ✨'
+    ];
+    $('#g2msg').textContent = msgs[Math.min(n-1, msgs.length-1)];
+    $('#char2').classList.remove('shake'); void $('#char2').offsetWidth;
+    $('#char2').classList.add('shake');
+    if(n>=3){ $('#g2hint').textContent='راستی، اون ستاره‌ها هم منتظرتن! 🌟'; $('#g2hint').className='g-hint warn'; }
+  });
+})();
+
+/* ============ ۳ ============ */
+(function(){
+  $('#g3yes').addEventListener('click', ()=> goTo(3));
+  $('#g3no').addEventListener('click', ()=>{
+    $('#g3hint').textContent = 'قول بده دیگه... آرزوهات قشنگن 🌠';
+    $('#g3hint').className = 'g-hint warn';
+  });
+})();
+
+/* ============ ۴ ============ */
+(function(){
+  let cnt = 0; const max = 5;
+  const tap = $('#starTap'), fill = $('#starMeterFill'), hint = $('#g4hint');
+  const sparks = ['✨','⭐','💫','🌟','✦'];
+  tap.addEventListener('click', e=>{
+    if(cnt>=max) return;
+    cnt++;
+    fill.style.width = (cnt/max*100)+'%';
+    hint.textContent = toFa(cnt) + ' از ' + toFa(max);
+    const r = document.createElement('div');
+    r.className = 'pop-spark';
+    r.textContent = sparks[Math.floor(Math.random()*sparks.length)];
+    r.style.left = e.clientX+'px'; r.style.top = e.clientY+'px';
+    document.body.appendChild(r);
+    setTimeout(()=> r.remove(), 1500);
+    if(cnt>=max){
+      hint.textContent = 'غبار ستاره‌ای جمع شد! ✨';
+      hint.className = 'g-hint ok';
+      setTimeout(()=> goTo(4), 800);
+    }
+  });
+})();
+
+/* ============ ۵ - انتخاب صورت فلکی ============ */
+(function(){
+  const cons = $$('.constellation');
+  const names = {
+    big: 'تو مثل خرس بزرگ، همیشه راهنمای راهی 🌌',
+    orion: 'تو مثل شکارچی، توی آسمون می‌درخشی ⭐',
+    pleiades: 'تو مثل ثریا، خوشه‌ی نورش می‌پیچه همه‌جا 💫'
+  };
+  const hint = $('#g5hint'); let picked = false;
+  cons.forEach(c=> c.addEventListener('click', ()=>{
+    if(picked) return; picked = true;
+    c.classList.add('picked');
+    hint.textContent = names[c.dataset.cons];
+    hint.className = 'g-hint ok';
+    setTimeout(()=> goTo(5), 1300);
+  }));
+})();
+
+/* ============ ۶ - فانوس ============ */
+(function(){
+  let lit = false;
+  const flame = $('#lanternFlame'), body = $('#lanternBody'), hint = $('#g6hint');
+  $('#lantern').addEventListener('click', ()=>{
+    if(lit) return; lit = true;
+    body.classList.add('lit');
+    flame.classList.add('on');
+    hint.textContent = 'فانوس روشن شد... و داره می‌ره آسمون 🏮';
+    hint.className = 'g-hint ok';
+    setTimeout(()=> runCountdown(()=> goTo(6)), 1200);
+  });
+})();
+
+/* ============ ۷ - معما ============ */
+(function(){
+  const opts = $$('#gate7 .opt'), hint = $('#g7hint');
+  let wrong = 0;
+  opts.forEach(o=> o.addEventListener('click', ()=>{
+    if(o.dataset.ok === '1'){
+      o.classList.add('right');
+      hint.textContent = 'آفرین! تو خودت جواب معما بودی 💫';
+      hint.className = 'g-hint ok';
+      setTimeout(()=> goTo(7), 900);
+    } else {
+      o.classList.add('wrong');
+      setTimeout(()=> o.classList.remove('wrong'), 500);
+      wrong++;
+      hint.textContent = wrong<2 ? 'نچ! بازم فکر کن...' : 'راهنمایی: کسی که این هدیه براشه 💗';
+      hint.className = 'g-hint warn';}
+  }));
+})();
+
+/* ============ ۸ - قفل ============ */
+(function(){
+  const input = $('#g8input'), btn = $('#g8btn'), hint = $('#g8hint');
+  btn.addEventListener('click', ()=>{
+    const v = input.value.trim();
+    if(v.length < 2){ hint.textContent='یه اسم حداقل ۲ حرفی بنویس 😊'; hint.className='g-hint warn'; return; }
+    if(/هستی|hasti|hastee/i.test(v)){
+      hint.textContent = 'قفل کهکشان باز شد! 🌌'; hint.className='g-hint ok';
+      setTimeout(()=> goTo(8), 700);
+    } else {
+      hint.textContent = 'این اسم اون اسم نیست... بازم امتحان کن 💫'; hint.className='g-hint warn';
+    }
+  });
+  input.addEventListener('keydown', e=>{ if(e.key==='Enter') btn.click(); });
+})();
+
+/* ============ ۹ - صندوق ============ */
+(function(){
+  let opened = false;
+  const chest = $('#chest'), hint = $('#g9hint');
+  chest.addEventListener('click', ()=>{
+    if(opened) return; opened = true;
+    chest.classList.add('open');
+    setTimeout(()=>{ chest.textContent = '💎'; }, 400);
+    hint.textContent = 'گنج واقعی تو هستی ✨';
+    hint.className = 'g-hint ok';
+    setTimeout(()=> goTo(9), 1600);
+  });
+})();
+
+/* ============ ۱۰ - آرزو ============ */
+(function(){
+  const dreams = $$('#gate10 .dream'), hint = $('#g10hint');
+  const msgs = {
+    love: 'عشق نثارت بشه، هستی جان 💖',
+    peace: 'آرامش، همیشه همراهت 🕊️',
+    star: 'بدرخش مثل ستاره‌ها، همیشه 🌟'
+  };
+  let picked = false;
+  dreams.forEach(d=> d.addEventListener('click', ()=>{
+    if(picked) return; picked = true;
+    d.classList.add('chosen');
+    hint.textContent = msgs[d.dataset.dream];
+    hint.className = 'g-hint ok';
+    setTimeout(()=> goTo(10), 1100);
+  }));
+})();
+
+/* ============ ۱۱ و ۱۲ ============ */
+$('#g11btn').addEventListener('click', ()=> goTo(11));
+$('#g12btn').addEventListener('click', ()=> runCountdown(()=> startGift()));
+
+/* ============ ۴۰ پیام ============ */
+const GREETINGS = [
+  {txt:'هستی عزیزم، خواهر مهربونم، روز دختر مبارک', lang:'fa'},
+  {txt:"Happy Daughter's Day, dear Hasti", lang:'en'},
+  {txt:'هستی العزیزة، عید بنت سعید', lang:'ar'},
+  {txt:'Sevgili Hasti, mutlu kızlar günü', lang:'tr'},
+  {txt:'Hasti chérie, bonne fête', lang:'fr'},
+  {txt:'Hasti querida, feliz día', lang:'es'},
+  {txt:'Liebe Hasti, schöner Tag', lang:'de'},
+  {txt:'Hasti cara, buona festa', lang:'it'},
+  {txt:'Hasti, feliz Dia da Menina', lang:'pt'},
+  {txt:'Хасти, с праздником', lang:'ru'},
+  {txt:'Hasti、こんにちは', lang:'ja'},
+  {txt:'Hasti, 안녕', lang:'ko'},
+  {txt:'Hasti, 你好', lang:'zh'},
+  {txt:'हस्ती, शुभ दिन', lang:'hi'},
+  {txt:'हस्ती, खुश रहो', lang:'ne'},
+  {txt:'Hasti, শুভ দিন', lang:'bn'},
+  {txt:'هستی، مبارک', lang:'ur'},
+  {txt:'هستی، مبارک', lang:'ps'},
+  {txt:'Hasti, günaydın', lang:'az'},
+  {txt:'Hasti, καλή μέρα', lang:'el'},
+  {txt:'Hasti, буен дан', lang:'sr'},
+  {txt:'Hasti, dobar dan', lang:'hr'},
+  {txt:'Hasti, dzień dobry', lang:'pl'},
+  {txt:'Hasti, dobrý den', lang:'cs'},
+  {txt:'Hasti, jó napot', lang:'hu'},
+  {txt:'Hasti, bună ziua', lang:'ro'},
+  {txt:'Hasti, добър ден', lang:'bg'},
+  {txt:'Hasti, hyvää päivää', lang:'fi'},
+  {txt:'Hasti, god dag', lang:'sv'},
+  {txt:'Hasti, god dag', lang:'no'},
+  {txt:'Hasti, goddag', lang:'da'},
+  {txt:'Hasti, goeie dag', lang:'af'},
+  {txt:'Hasti, sawubona', lang:'zu'},
+  {txt:'Hasti, jambo', lang:'sw'},
+  {txt:'Hasti, habari', lang:'am'},
+  {txt:'Hasti, שלום', lang:'he'},
+  {txt:'Hasti, สวัสดี', lang:'th'},
+  {txt:'Hasti, xin chào', lang:'vi'},
+  {txt:'Hasti, selamat', lang:'id'},
+  {txt:'Hasti, kumusta', lang:'tl'}
+];
+
+/* ============ نقاط روی هلال ماه ============ */
+/* پارامترها طوری انتخاب شدن که پیام‌ها یه هلال قشنگ با نوک‌های رو به راست بسازن */
+const CR = { R1: 350, R2: 320, d: 150 };
+function crescentPoint(t, side){
+  // t from 0 to 1
+  if(side === 'outer'){
+    // کمان بیرونی روی دایره‌ی بزرگ، از 66° تا 294° (عبور از 180°)
+    const angle = (66 + t * (294 - 66)) * Math.PI / 180;
+    return { x: CR.R1 * Math.cos(angle), y: CR.R1 * Math.sin(angle) };
+  } else {
+    // کمان داخلی روی دایره‌ی کوچک، از 91.4° تا 268.6° (عبور از 180°)
+    const angle = (91.4 + t * (268.6 - 91.4)) * Math.PI / 180;
+    return { x:CR.d + CR.R2 * Math.cos(angle), y: CR.R2 * Math.sin(angle) };
+  }
+}
+
+/* ============ گل‌ها + پروانه + کرم شب‌تاب + ستاره ============ */
+function makeGarden(){
+  const garden = $('#garden');
+  const floaters = ['🌸','🌷','🌸','💮','🪷','🦋','🦋','✨','🌟','💫'];
+  const count = IS_MOBILE ? 60 : 100;
+  for(let i=0;i<count;i++){
+    const f = document.createElement('div');
+    f.className = 'float-el';
+    const inner = document.createElement('span');
+    inner.className = 'float-el-inner';
+    inner.textContent = floaters[Math.floor(Math.random()*floaters.length)];
+    inner.style.fontSize = (14 + Math.random()*24)+'px';
+    f.appendChild(inner);
+    f.style.left = (Math.random()*100)+'vw';
+    f.style.animationDuration = (9 + Math.random()*11)+'s';
+    f.style.animationDelay = (-Math.random()*14)+'s';
+    inner.style.animationDuration = (2 + Math.random()*2.5)+'s';
+    inner.style.animationDelay = (-Math.random()*3)+'s';
+    garden.appendChild(f);
+  }
+
+  /* کرم‌های شب‌تاب */
+  const ffCount = IS_MOBILE ? 18 : 30;
+  for(let i=0;i<ffCount;i++){
+    const ff = document.createElement('div');
+    ff.className = 'firefly';
+    const sz = 4 + Math.random()*7;
+    ff.style.width = sz+'px'; ff.style.height = sz+'px';
+    ff.style.left = (Math.random()*100)+'vw';
+    ff.style.top = (40 + Math.random()*60)+'vh';
+    ff.style.animationDuration = (5 + Math.random()*5)+'s';
+    ff.style.animationDelay = (-Math.random()*8)+'s';
+    garden.appendChild(ff);
+  }
+}
+
+/* ============ شروع هدیه ============ */
+let giftStarted = false;
+function startGift(){
+  if(giftStarted) return;
+  giftStarted = true;
+  gateEls[cur].classList.remove('active');
+  $('#gift').classList.add('show');
+
+  /* مقیاس */
+  function setScale(){
+    const ref = IS_MOBILE ? 900 : 1000;
+    const s = Math.min(window.innerWidth/ref, window.innerHeight/ref) * (IS_MOBILE ? 0.95 : 1);
+    $('#stage').style.setProperty('--stage-scale', s);
+  }
+  setScale();
+  window.addEventListener('resize', ()=> setScale());
+  window.addEventListener('orientationchange', ()=> setTimeout(setScale, 200));
+
+  /* فونت پایه */
+  const BASE_FS = IS_MOBILE ? 22 : 13;
+
+  /* چیدمان ۴۰ متن روی هلال ماه (۲۰ روی کمان بیرونی، ۲۰ روی کمان داخلی) */
+  const heartWords = $('#heartWords');
+  const N = GREETINGS.length;      // 40
+  const HALF = N / 2;              // 20
+  const order = [...GREETINGS];
+
+  /* برای تنوع، پیام‌ها رو بین کمان بیرونی و داخلی پخش می‌کنیم */
+  for(let i=0;i<HALF;i++){
+    const t = i / (HALF - 1);
+
+    /* پیام روی کمان بیرونی */
+    const pOut = crescentPoint(t, 'outer');
+    const gOut = order[i];
+    const elOut = document.createElement('div');
+    elOut.className = 'hw';
+    elOut.textContent = gOut.txt;
+    let fs1 = BASE_FS;
+    if(gOut.lang === 'fa') fs1 = BASE_FS + 2;
+    if(gOut.txt.length > 28) fs1 = Math.max(IS_MOBILE ? 13 : 8, fs1 - 2);
+    elOut.style.fontSize = fs1 + 'px';
+    elOut.style.left = (500 + pOut.x) + 'px';
+    elOut.style.top  = (500 + pOut.y) + 'px';
+
+    /* چرخش ملایم بر اساس موقعیت */
+    const rot1 = -Math.atan2(pOut.x, -pOut.y) * 180 / Math.PI * 0.18;
+    elOut.dataset.rot = rot1.toFixed(2);
+    elOut.style.transform = `translate(-50%,-50%) translateY(22px) scale(.78) rotate(${rot1}deg)`;
+    heartWords.appendChild(elOut);
+
+    /* پیام روی کمان داخلی */
+    const pIn = crescentPoint(t, 'inner');
+    const gIn = order[i + HALF];
+    const elIn = document.createElement('div');
+    elIn.className = 'hw';
+    elIn.textContent = gIn.txt;
+    let fs2 = BASE_FS - 1;
+    if(gIn.lang === 'fa') fs2 = BASE_FS + 1;
+    if(gIn.txt.length > 28) fs2 = Math.max(IS_MOBILE ? 12 : 8, fs2 - 2);
+    elIn.style.fontSize = fs2 + 'px';
+    elIn.style.left = (500 + pIn.x) + 'px';
+    elIn.style.top  = (500 + pIn.y) + 'px';
+
+    const rot2 = -Math.atan2(pIn.x, -pIn.y) * 180 / Math.PI * 0.18;
+    elIn.dataset.rot = rot2.toFixed(2);
+    elIn.style.transform = `translate(-50%,-50%) translateY(22px) scale(.78) rotate(${rot2}deg)`;
+    heartWords.appendChild(elIn);
+  }
+
+  /* ظاهر شدن دونه دونه — از نوک پایین به بالا، بعد نوک بالایی */
+  const wordEls = Array.from(heartWords.children);
+  const delayStart = 500;
+  const perWord = IS_MOBILE ? 80 : 90;
+  wordEls.forEach((el, i)=>{
+    setTimeout(()=>{
+      el.classList.add('on');
+      el.style.transform = `translate(-50%,-50%) translateY(0) scale(1) rotate(${el.dataset.rot}deg)`;
+    }, delayStart + i*perWord);
+  });
+
+  const totalWords = delayStart + wordEls.length*perWord + 700;
+
+  /* بعد از اتمام متن‌ها */
+  setTimeout(()=>{
+    /* فلش طلایی + sweep */
+    $('#flash').classList.add('go');
+    $('#sweep').classList.add('go');
+    setTimeout(()=>{
+      $('#flash').classList.remove('go');
+      $('#sweep').classList.remove('go');
+    }, 1800);
+
+    /* متن فارسی بزرگ وسط */
+    const t1 = $('#mainText .l1');
+    const t2 = $('#mainText .l2');
+    if(IS_MOBILE){
+      t1.style.fontSize = '86px';
+      t2.style.fontSize = '46px';
+      $('#mainText').style.top = '46%';
+    } else {
+      t1.style.fontSize = '80px';
+      t2.style.fontSize = '42px';
+    }
+    setTimeout(()=> $('#mainText').classList.add('on'), 250);
+
+    /* ماه کامل پشت با تپش */
+    setTimeout(()=> $('#fullMoon').classList.add('on'), 700);
+
+    /* گل‌ها + پروانه + کرم شب‌تاب */
+    setTimeout(()=> makeGarden(), 1200);
+
+    /* یادداشت پایین */
+    setTimeout(()=> $('#finalNote').classList.add('on'), 2800);
+  }, totalWords);
+}
+
+/* ============ ریست ============ */
+$('#replay').addEventListener('click', ()=> location.reload());
+</script>
+</body>
+</html>
